@@ -1,0 +1,10 @@
+.title {
+  font-weight: 100;
+}
+.he {
+  display: none;
+}
+/* he보다 block이 밑에있을것. */
+.block {
+  display: block;
+}
