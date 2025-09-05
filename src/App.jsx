@@ -1,39 +1,39 @@
-import './App.css'
-import Header from './components/Header.jsx';
-import Footer from './components/Footer.jsx';
-import ProductList from './components/ProductList.jsx';
-import TabUi from './components/TabUi.jsx';
-import { useState } from 'react';
-
-
+import './App.css';
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 
 function App() {
-  const [prodFlg, setProdFlg] = useState(true);
-  const [tabFlg, setTabFlg] = useState(false);
-  
-  const viewProductList = () => {
-    setProdFlg(true);
-    setTabFlg(false);
-  }
-  const viewTabUi = () => {
-    setProdFlg(false);
-    setTabFlg(true);
+  //컴포넌트 내부에서 프로그래밍 방식으로 페이지 이동을 구현
+  const navigate = useNavigate();
+
+  const ok = () => {
+    navigate('/ok');
   }
 
   return(
     <>
-      <Header></Header>
-      <main>
-        <div>
-          <span onClick={viewProductList}>상품 리스트</span>
-          <span onClick={viewTabUi}>테스트</span>
+      <header>
+        <h1>앱</h1>
+        <div className="nav">
+          <Link to={'/list'}>리스트 페이지</Link>
+          <Link to={'/detail'}>상세 페이지</Link>
+          <br />
+          <NavLink to={'/list'}>리스트 페이지</NavLink>
+          <NavLink to={'/detail'}>상세 페이지</NavLink>
+          <br />
+          <button type="button" onClick={ok}>확인</button>
         </div>
-        { tabFlg && <TabUi></TabUi> }
-        { prodFlg && <ProductList></ProductList> }
+      </header>
+
+      <main>
+        {/* 라우터의 자식 컴포넌트를 출력 */}
+        <Outlet></Outlet>
       </main>
-      <Footer></Footer>
+
+      <footer>
+        <p>카피라이트</p>
+      </footer>
     </>
-  );
+  )
 }
 
 export default App;
